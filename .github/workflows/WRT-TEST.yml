@@ -18,14 +18,15 @@ on:
           - MT7986
           - TEST
       SOURCE:
-        default: 'Yuzhii0718/immortalwrt-mt798x-6.6-padavanonly'
+        default: 'padavanonly/immortalwrt-mt798x-6.6'
         required: true
         type: choice
         options:
+         - padavanonly/immortalwrt-mt798x-6.6
          - Yuzhii0718/immortalwrt-mt798x-6.6-padavanonly
          - chasey-dev/immortalwrt-mt798x-rebase
       BRANCH:
-        default: 'openwrt-24.10-6.6'
+        default: 'mt798x-mt799x-6.6-mtwifi'
         required: true
         type: string
       PACKAGE:
