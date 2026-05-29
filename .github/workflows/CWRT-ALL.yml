@@ -54,7 +54,6 @@ jobs:
   config:
     needs: cleanup
     name: ${{matrix.CONFIG}}
-    runs-on: ${{inputs.RUNNER || 'ubuntu-latest'}}
     strategy:
       fail-fast: false
       #max-parallel: 4
