@@ -101,6 +101,7 @@ jobs:
           echo "WRT_WIFI=wifi-yes" >> $GITHUB_ENV
           echo "WRT_KVER=none" >> $GITHUB_ENV
           echo "WRT_LIST=none" >> $GITHUB_ENV
+          echo "WRT_ARCH=$([[ '${{inputs.WRT_RUNNER}}' == 'self-hosted' ]] && echo 'arm64' || echo 'x64')" >> $GITHUB_ENV
 
       - name: Clone Code
         run: |
@@ -129,8 +130,8 @@ jobs:
         if: env.WRT_TEST != 'true'
         uses: actions/cache@main
         with:
-          key: ${{env.WRT_CONFIG}}-${{env.WRT_INFO}}-${{env.WRT_HASH}}
-          restore-keys: ${{env.WRT_CONFIG}}-${{env.WRT_INFO}}
+          key: ${{env.WRT_CONFIG}}-${{env.WRT_INFO}}-${{env.WRT_HASH}}-${{env.WRT_ARCH}}
+          restore-keys: ${{env.WRT_CONFIG}}-${{env.WRT_INFO}}-${{env.WRT_ARCH}}
           path: |
             ./wrt/.ccache
             ./wrt/staging_dir/host*
