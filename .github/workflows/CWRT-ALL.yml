@@ -21,6 +21,14 @@ on:
         default: 'false'
         required: false
         type: boolean
+      RUNNER:
+        description: '选择运行runner类型'
+        required: true
+        type: choice
+        default: 'ubuntu-latest'
+        options:
+          - ubuntu-latest
+          - self-hosted
 
 env:
   GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -46,6 +54,7 @@ jobs:
   config:
     needs: cleanup
     name: ${{matrix.CONFIG}}
+    runs-on: ${{inputs.RUNNER || 'ubuntu-latest'}}
     strategy:
       fail-fast: false
       #max-parallel: 4
@@ -82,3 +91,5 @@ jobs:
       WRT_PACKAGE: ${{inputs.PACKAGE}}
       #仅输出配置文件
       WRT_TEST: ${{inputs.TEST}}
+      #Runner类型
+      WRT_RUNNER: ${{inputs.RUNNER}}
